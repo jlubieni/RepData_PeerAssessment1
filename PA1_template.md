@@ -102,7 +102,7 @@ library(dplyr)
 stepsPerDay <- 
         dat %>%
         group_by(date) %>%
-        summarize(totalSteps = sum(steps, na.rm = T))
+        summarize(totalSteps = sum(steps))
 ```
 
 
@@ -116,13 +116,13 @@ with(stepsPerDay, hist(totalSteps, breaks = "FD", main ="Total number of steps t
 ```r
 totalStepsPerDaysummary <- 
         stepsPerDay %>%
-        summarize(mean = mean(totalSteps),
-                  median = median(totalSteps))
+        summarize(mean = mean(totalSteps, na.rm=T),
+                  median = median(totalSteps, na.rm=T))
 ```
 
-The **mean** total number of steps per day is 9354.23
+The **mean** total number of steps per day is 1.076619\times 10^{4}
 
-The **median** total number of steps per day is 1.0395\times 10^{4}
+The **median** total number of steps per day is 1.0765\times 10^{4}
 
 ## What is the average daily activity pattern?
 
@@ -222,7 +222,8 @@ with(stepsPerDay, hist(totalSteps, main ="Total number of steps per day", xlab =
 stepsPerDayNewSummary <- summarize(stepsPerDayNew, mean = mean(totalSteps), median = median(totalSteps))
 ```
 
-The mean and median total number of steps for this new data is 1.076619\times 10^{4} and 1.076619\times 10^{4}, respectively. Imputing missing values increased the estimates of mean and median. Also, the distribution of steps per day is closer to normal distribution. 
+The mean and median total number of steps for this new data is 1.076619\times 10^{4} and 1.076619\times 10^{4}. Imputing missing values does not change mean and median by much. When we impute missing data the mean gets closer to median.
+
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
